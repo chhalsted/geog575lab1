@@ -1,0 +1,21 @@
+/* stylesheet - Christian Halsted 2019 */
+
+/* #mapid1 { height: 300px; }
+#mapid2 { height: 300px; } */
+
+.mapid { height: 450px; }
+
+.leaflet-popup-content p {
+    margin: 0.2em 0;
+}
+
+#mapid3 {
+  width: 80%;
+  display: inline-block;
+}
+#panel {
+  width: 16%;
+  padding: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
