@@ -3,9 +3,9 @@
 /* #mapid1 { height: 300px; }
 #mapid2 { height: 300px; } */
 
-.mapid { height: 450px; }
+.mapid { height: 550px; }
 
-.leaflet-popup-content p {
+/* .leaflet-popup-content p {
     margin: 0.2em 0;
 }
 
@@ -18,4 +18,4 @@
   padding: 10px;
   display: inline-block;
   vertical-align: top;
-}
+} */

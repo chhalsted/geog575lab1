@@ -1,10 +1,50 @@
 //Christian Halsted 2019
 
-var map = L.map('mapid').setView([51.505, -0.09], 13);
+var map = L.map('mapid').setView([45.5, -69.0], 7);
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
 }).addTo(map);
+
+//add geoJSON points to the map as image icons only
+// $.ajax("data/MaineWellsByCounty.geojson", {
+//   dataType: "json",
+//   success: function(response){
+//     L.geoJson(response).addTo(map);
+//   }
+// });
+
+function onEachFeature(feature, layer) {
+  var popupContent = "<p>2010: " + feature.properties["y2010"] + "</p>";
+  if (feature.properties) {
+    layer.bindPopup(popupContent);
+  };
+};
+
+$.ajax("data/MaineWellsByCounty.geojson", {
+  dataType: "json",
+  success: function(response){
+    var geojsonMarkerOptions = {
+    	radius: 8,
+    	fillColor: "#ff7800",
+    	color: "#000",
+    	weight: 1,
+    	opacity: 1,
+    	fillOpacity: 0.6
+    };
+
+    //create a Leaflet GeoJSON layer and add it to the map
+    L.geoJson(response, {
+      pointToLayer: function (feature, latlng){
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+      },
+      onEachFeature: onEachFeature
+    }).addTo(map);
+  }
+});
+
+
+
 
 // //add tile layer...replace project id and accessToken with your own
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -14,40 +54,40 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //    accessToken: 'pk.eyJ1IjoiY2hoYWxzdGVkIiwiYSI6ImNqbDJ5NTI1aDF2a2szcW41dGFvcnlsMDUifQ.VwB2q6vg1Z6ORVv4Myyrhg'
 // }).addTo(map);
 
-var marker = L.marker([51.5, -0.09]).addTo(map);
-
-var circle = L.circle([51.508, -0.11], 500, {
-   color: 'red',
-   fillColor: '#f03',
-   fillOpacity: 0.5
-}).addTo(map);
-
-var polygon = L.polygon([
-   [51.509, -0.08],
-   [51.503, -0.06],
-   [51.51, -0.047]
-]).addTo(map);
-
-marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-circle.bindPopup("I am a circle BLAH.");
-polygon.bindPopup("I am a polygon.");
-
-var popup = L.popup()
-   .setLatLng([51.5, -0.09])
-   .setContent("I am a standalone popup.")
-   .openOn(map);
-
-var popup = L.popup();
-
-function onMapClick(e) {
-   popup
-       .setLatLng(e.latlng)
-       .setContent("You clicked the map at " + e.latlng.toString())
-       .openOn(map);
-}
-
-map.on('click', onMapClick);
-
+// var marker = L.marker([51.5, -0.09]).addTo(map);
+//
+// var circle = L.circle([51.508, -0.11], 500, {
+//    color: 'red',
+//    fillColor: '#f03',
+//    fillOpacity: 0.5
+// }).addTo(map);
+//
+// var polygon = L.polygon([
+//    [51.509, -0.08],
+//    [51.503, -0.06],
+//    [51.51, -0.047]
+// ]).addTo(map);
+//
+// marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+// circle.bindPopup("I am a circle BLAH.");
+// polygon.bindPopup("I am a polygon.");
+//
+// var popup = L.popup()
+//    .setLatLng([51.5, -0.09])
+//    .setContent("I am a standalone popup.")
+//    .openOn(map);
+//
+// var popup = L.popup();
+//
+// function onMapClick(e) {
+//    popup
+//        .setLatLng(e.latlng)
+//        .setContent("You clicked the map at " + e.latlng.toString())
+//        .openOn(map);
+// }
+//
+// map.on('click', onMapClick);
+//
 
 	// var mymap = L.map('mapid').setView([51.505, -0.09], 13);
   //
@@ -59,71 +99,71 @@ map.on('click', onMapClick);
 	// 	id: 'mapbox.streets'
 	// }).addTo(mymap);
 
-var geojsonFeature = {
-  	"type": "Feature",
-  	"properties": {
-  		"name": "Coors Field",
-  		"amenity": "Baseball Stadium",
-  		"popupContent": "This is where the Rockies play!"
-  	},
-  	"geometry": {
-  		"type": "Point",
-  		"coordinates": [-104.99404, 39.75621]
-  	}
-  };
-  L.geoJSON(geojsonFeature).addTo(map);
-
-var myLines = [{
-	"type": "LineString",
-	"coordinates": [[-100, 40], [-105, 45], [-110, 55]]
-}, {
-	"type": "LineString",
-	"coordinates": [[-105, 40], [-110, 45], [-115, 55]]
-}];
-
-var myStyle = {
-	"color": "#ff7800",
-	"weight": 5,
-	"opacity": 0.65
-};
-
-L.geoJSON(myLines, {
-	style: myStyle
-}).addTo(map);
-
-var states = [{
-	"type": "Feature",
-	"properties": {"party": "Republican"},
-	"geometry": {
-		"type": "Polygon",
-		"coordinates": [[
-			[-104.05, 48.99],
-			[-97.22,  48.98],
-			[-96.58,  45.94],
-			[-104.03, 45.94],
-			[-104.05, 48.99]
-		]]
-	}
-}, {
-	"type": "Feature",
-	"properties": {"party": "Democrat"},
-	"geometry": {
-		"type": "Polygon",
-		"coordinates": [[
-			[-109.05, 41.00],
-			[-102.06, 40.99],
-			[-102.03, 36.99],
-			[-109.04, 36.99],
-			[-109.05, 41.00]
-		]]
-	}
-}];
-
-L.geoJSON(states, {
-	style: function(feature) {
-		switch (feature.properties.party) {
-			case 'Republican': return {color: "#ff0000"};
-			case 'Democrat':   return {color: "#0000ff"};
-		}
-	}
-}).addTo(map);
+// var geojsonFeature = {
+//   	"type": "Feature",
+//   	"properties": {
+//   		"name": "Coors Field",
+//   		"amenity": "Baseball Stadium",
+//   		"popupContent": "This is where the Rockies play!"
+//   	},
+//   	"geometry": {
+//   		"type": "Point",
+//   		"coordinates": [-104.99404, 39.75621]
+//   	}
+//   };
+//   L.geoJSON(geojsonFeature).addTo(map);
+//
+// var myLines = [{
+// 	"type": "LineString",
+// 	"coordinates": [[-100, 40], [-105, 45], [-110, 55]]
+// }, {
+// 	"type": "LineString",
+// 	"coordinates": [[-105, 40], [-110, 45], [-115, 55]]
+// }];
+//
+// var myStyle = {
+// 	"color": "#ff7800",
+// 	"weight": 5,
+// 	"opacity": 0.65
+// };
+//
+// L.geoJSON(myLines, {
+// 	style: myStyle
+// }).addTo(map);
+//
+// var states = [{
+// 	"type": "Feature",
+// 	"properties": {"party": "Republican"},
+// 	"geometry": {
+// 		"type": "Polygon",
+// 		"coordinates": [[
+// 			[-104.05, 48.99],
+// 			[-97.22,  48.98],
+// 			[-96.58,  45.94],
+// 			[-104.03, 45.94],
+// 			[-104.05, 48.99]
+// 		]]
+// 	}
+// }, {
+// 	"type": "Feature",
+// 	"properties": {"party": "Democrat"},
+// 	"geometry": {
+// 		"type": "Polygon",
+// 		"coordinates": [[
+// 			[-109.05, 41.00],
+// 			[-102.06, 40.99],
+// 			[-102.03, 36.99],
+// 			[-109.04, 36.99],
+// 			[-109.05, 41.00]
+// 		]]
+// 	}
+// }];
+//
+// L.geoJSON(states, {
+// 	style: function(feature) {
+// 		switch (feature.properties.party) {
+// 			case 'Republican': return {color: "#ff0000"};
+// 			case 'Democrat':   return {color: "#0000ff"};
+// 		}
+// 	}
+// }).addTo(map);
