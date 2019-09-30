@@ -49,13 +49,21 @@
     <layer-tree-layer providerKey="memory" expanded="1" name="Reprojected" id="output_0ae4240d_d037_48d0_b1f7_30230b5495ca" checked="Qt::Unchecked" source="Point?crs=EPSG:4326&amp;field=OBJECTID:long(10,0)&amp;field=COUNTY:string(80,0)&amp;field=CNTYCODE:string(80,0)&amp;field=LAND:string(80,0)&amp;field=ISLAND:string(80,0)&amp;field=TAG:string(80,0)&amp;field=GlobalID:string(80,0)&amp;field=created_us:string(80,0)&amp;field=created_da:string(80,0)&amp;field=last_edite:string(80,0)&amp;field=last_edi_1:string(80,0)&amp;field=ShapeSTAre:double(23,15)&amp;field=ShapeSTLen:double(23,15)&amp;uid={1b0f8f1a-af82-484c-baf3-cff951576c5c}">
       <customproperties/>
     </layer-tree-layer>
+    <layer-tree-layer providerKey="ogr" expanded="1" name="MaineCounties" id="MaineCounties_41c43b4a_9246_4664_aae3_d1e748c61375" checked="Qt::Checked" source="./MaineCounties.geojson|layername=MaineCounties">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer providerKey="memory" expanded="1" name="Simplified" id="output_a302c90b_d356_4f7d_8763_2000f1558961" checked="Qt::Checked" source="MultiPolygon?crs=EPSG:26919&amp;field=OBJECTID:long(10,0)&amp;field=COUNTY:string(80,0)&amp;field=CNTYCODE:string(80,0)&amp;field=LAND:string(80,0)&amp;field=ISLAND:string(80,0)&amp;field=TAG:string(80,0)&amp;field=GlobalID:string(80,0)&amp;field=created_us:string(80,0)&amp;field=created_da:string(80,0)&amp;field=last_edite:string(80,0)&amp;field=last_edi_1:string(80,0)&amp;field=ShapeSTAre:double(23,15)&amp;field=ShapeSTLen:double(23,15)&amp;uid={491df328-0f90-41ca-9de5-5fc648865e19}">
+      <customproperties/>
+    </layer-tree-layer>
     <layer-tree-layer providerKey="memory" expanded="1" name="Centroids" id="output_32f5cce9_41a3_4556_a26e_91aecc6ffed3" checked="Qt::Unchecked" source="Point?crs=EPSG:26919&amp;field=OBJECTID:long(10,0)&amp;field=COUNTY:string(80,0)&amp;field=CNTYCODE:string(80,0)&amp;field=LAND:string(80,0)&amp;field=ISLAND:string(80,0)&amp;field=TAG:string(80,0)&amp;field=GlobalID:string(80,0)&amp;field=created_us:string(80,0)&amp;field=created_da:string(80,0)&amp;field=last_edite:string(80,0)&amp;field=last_edi_1:string(80,0)&amp;field=ShapeSTAre:double(23,15)&amp;field=ShapeSTLen:double(23,15)&amp;uid={c72923e4-04ee-4b55-b53f-443ee9772d08}">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer providerKey="memory" expanded="1" name="Dissolved" id="output_22dc1e6d_16e7_419a_9e40_24847941fa2c" checked="Qt::Unchecked" source="MultiPolygon?crs=EPSG:26919&amp;field=OBJECTID:long(10,0)&amp;field=COUNTY:string(80,0)&amp;field=CNTYCODE:string(80,0)&amp;field=LAND:string(80,0)&amp;field=ISLAND:string(80,0)&amp;field=TAG:string(80,0)&amp;field=GlobalID:string(80,0)&amp;field=created_us:string(80,0)&amp;field=created_da:string(80,0)&amp;field=last_edite:string(80,0)&amp;field=last_edi_1:string(80,0)&amp;field=ShapeSTAre:double(23,15)&amp;field=ShapeSTLen:double(23,15)&amp;uid={bd845d39-8b6d-4022-ba1d-fa09836975d8}">
-      <customproperties/>
+    <layer-tree-layer providerKey="memory" expanded="1" name="Dissolved" id="output_22dc1e6d_16e7_419a_9e40_24847941fa2c" checked="Qt::Checked" source="MultiPolygon?crs=EPSG:26919&amp;field=OBJECTID:long(10,0)&amp;field=COUNTY:string(80,0)&amp;field=CNTYCODE:string(80,0)&amp;field=LAND:string(80,0)&amp;field=ISLAND:string(80,0)&amp;field=TAG:string(80,0)&amp;field=GlobalID:string(80,0)&amp;field=created_us:string(80,0)&amp;field=created_da:string(80,0)&amp;field=last_edite:string(80,0)&amp;field=last_edi_1:string(80,0)&amp;field=ShapeSTAre:double(23,15)&amp;field=ShapeSTLen:double(23,15)&amp;uid={bd845d39-8b6d-4022-ba1d-fa09836975d8}">
+      <customproperties>
+        <property value="1" key="showFeatureCount"/>
+      </customproperties>
     </layer-tree-layer>
-    <layer-tree-layer providerKey="ogr" expanded="1" name="Maine_Boundaries_County_Polygon" id="Maine_Boundaries_County_Polygon_660e394a_41a6_4cab_820f_b4a177b16e02" checked="Qt::Checked" source="./Maine_Boundaries_County_Polygon/Maine_Boundaries_County_Polygon.shp|layerid=0|subset=&quot;LAND&quot; = 'y'">
+    <layer-tree-layer providerKey="ogr" expanded="1" name="Maine_Boundaries_County_Polygon" id="Maine_Boundaries_County_Polygon_660e394a_41a6_4cab_820f_b4a177b16e02" checked="Qt::Unchecked" source="./Maine_Boundaries_County_Polygon/Maine_Boundaries_County_Polygon.shp|layerid=0|subset=&quot;LAND&quot; = 'y'">
       <customproperties>
         <property value="1" key="showFeatureCount"/>
       </customproperties>
@@ -74,6 +82,8 @@
       <item>output_7671854e_3ead_4e92_96ee_26d5dd3d6717</item>
       <item>county_points_well_stats_320bc860_c2fb_4938_a305_40375ff8a382</item>
       <item>MaineWellsByCounty_be117c70_d3e3_4c3e_a037_d1f58e10ff89</item>
+      <item>output_a302c90b_d356_4f7d_8763_2000f1558961</item>
+      <item>MaineCounties_41c43b4a_9246_4664_aae3_d1e748c61375</item>
     </custom-order>
   </layer-tree-group>
   <snapping-settings mode="2" tolerance="12" type="1" unit="1" intersection-snapping="0" enabled="0">
@@ -84,11 +94,13 @@
       <layer-setting units="1" tolerance="12" id="Maine_Boundaries_County_Polygon_660e394a_41a6_4cab_820f_b4a177b16e02" type="1" enabled="0"/>
       <layer-setting units="1" tolerance="12" id="county_points_well_stats_320bc860_c2fb_4938_a305_40375ff8a382" type="1" enabled="0"/>
       <layer-setting units="1" tolerance="12" id="output_a25b2303_cf81_4982_a417_13ba0c75ab1e" type="1" enabled="0"/>
+      <layer-setting units="1" tolerance="12" id="MaineCounties_41c43b4a_9246_4664_aae3_d1e748c61375" type="1" enabled="0"/>
       <layer-setting units="1" tolerance="12" id="output_0e4b540c_6499_45f5_9896_2c574cfff863" type="1" enabled="0"/>
       <layer-setting units="1" tolerance="12" id="output_22dc1e6d_16e7_419a_9e40_24847941fa2c" type="1" enabled="0"/>
       <layer-setting units="1" tolerance="12" id="output_0ae4240d_d037_48d0_b1f7_30230b5495ca" type="1" enabled="0"/>
       <layer-setting units="1" tolerance="12" id="output_32f5cce9_41a3_4556_a26e_91aecc6ffed3" type="1" enabled="0"/>
       <layer-setting units="1" tolerance="12" id="county_points_wgs84_18c73e4e_d0eb_447c_bf3d_2cb19779a5eb" type="1" enabled="0"/>
+      <layer-setting units="1" tolerance="12" id="output_a302c90b_d356_4f7d_8763_2000f1558961" type="1" enabled="0"/>
       <layer-setting units="1" tolerance="12" id="MaineWellsByCounty_be117c70_d3e3_4c3e_a037_d1f58e10ff89" type="1" enabled="0"/>
     </individual-layer-settings>
   </snapping-settings>
@@ -168,25 +180,316 @@
         <legendlayerfile layerid="output_0ae4240d_d037_48d0_b1f7_30230b5495ca" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
+    <legendlayer name="MaineCounties" checked="Qt::Checked" open="true" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="MaineCounties_41c43b4a_9246_4664_aae3_d1e748c61375" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer name="Simplified" checked="Qt::Checked" open="true" drawingOrder="-1" showFeatureCount="0">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile layerid="output_a302c90b_d356_4f7d_8763_2000f1558961" isInOverview="0" visible="1"/>
+      </filegroup>
+    </legendlayer>
     <legendlayer name="Centroids" checked="Qt::Unchecked" open="true" drawingOrder="-1" showFeatureCount="0">
       <filegroup hidden="false" open="true">
         <legendlayerfile layerid="output_32f5cce9_41a3_4556_a26e_91aecc6ffed3" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
-    <legendlayer name="Dissolved" checked="Qt::Unchecked" open="true" drawingOrder="-1" showFeatureCount="0">
+    <legendlayer name="Dissolved" checked="Qt::Checked" open="true" drawingOrder="-1" showFeatureCount="1">
       <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="output_22dc1e6d_16e7_419a_9e40_24847941fa2c" isInOverview="0" visible="0"/>
+        <legendlayerfile layerid="output_22dc1e6d_16e7_419a_9e40_24847941fa2c" isInOverview="0" visible="1"/>
       </filegroup>
     </legendlayer>
-    <legendlayer name="Maine_Boundaries_County_Polygon" checked="Qt::Checked" open="true" drawingOrder="-1" showFeatureCount="1">
+    <legendlayer name="Maine_Boundaries_County_Polygon" checked="Qt::Unchecked" open="true" drawingOrder="-1" showFeatureCount="1">
       <filegroup hidden="false" open="true">
-        <legendlayerfile layerid="Maine_Boundaries_County_Polygon_660e394a_41a6_4cab_820f_b4a177b16e02" isInOverview="0" visible="1"/>
+        <legendlayerfile layerid="Maine_Boundaries_County_Polygon_660e394a_41a6_4cab_820f_b4a177b16e02" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
   </legend>
   <mapViewDocks/>
   <mapViewDocks3D/>
   <projectlayers>
+    <maplayer simplifyLocal="1" maxScale="0" simplifyAlgorithm="0" styleCategories="AllStyleCategories" minScale="1e+08" type="vector" labelsEnabled="0" simplifyDrawingTol="1" autoRefreshTime="0" geometry="Polygon" simplifyMaxScale="1" readOnly="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" simplifyDrawingHints="1" refreshOnNotifyMessage="">
+      <extent>
+        <xmin>336630.28120000002672896</xmin>
+        <ymin>4759246.38319999910891056</ymin>
+        <xmax>662458.31259999983012676</xmax>
+        <ymax>5256292.5</ymax>
+      </extent>
+      <id>MaineCounties_41c43b4a_9246_4664_aae3_d1e748c61375</id>
+      <datasource>./MaineCounties.geojson|layername=MaineCounties</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>MaineCounties</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=19 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2296</srsid>
+          <srid>26919</srid>
+          <authid>EPSG:26919</authid>
+          <description>NAD83 / UTM zone 19N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <renderer-v2 symbollevels="0" enableorderby="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol alpha="1" name="0" type="fill" force_rhr="0" clip_to_extent="1">
+            <layer pass="0" locked="0" class="SimpleFill" enabled="1">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="114,155,111,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties/>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="OBJECTID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTY">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="CNTYCODE">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="LAND">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ISLAND">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TAG">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GlobalID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="created_us">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="created_da">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="last_edite">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="last_edi_1">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ShapeSTAre">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ShapeSTLen">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="OBJECTID"/>
+        <alias index="1" name="" field="COUNTY"/>
+        <alias index="2" name="" field="CNTYCODE"/>
+        <alias index="3" name="" field="LAND"/>
+        <alias index="4" name="" field="ISLAND"/>
+        <alias index="5" name="" field="TAG"/>
+        <alias index="6" name="" field="GlobalID"/>
+        <alias index="7" name="" field="created_us"/>
+        <alias index="8" name="" field="created_da"/>
+        <alias index="9" name="" field="last_edite"/>
+        <alias index="10" name="" field="last_edi_1"/>
+        <alias index="11" name="" field="ShapeSTAre"/>
+        <alias index="12" name="" field="ShapeSTLen"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" applyOnUpdate="0" field="OBJECTID"/>
+        <default expression="" applyOnUpdate="0" field="COUNTY"/>
+        <default expression="" applyOnUpdate="0" field="CNTYCODE"/>
+        <default expression="" applyOnUpdate="0" field="LAND"/>
+        <default expression="" applyOnUpdate="0" field="ISLAND"/>
+        <default expression="" applyOnUpdate="0" field="TAG"/>
+        <default expression="" applyOnUpdate="0" field="GlobalID"/>
+        <default expression="" applyOnUpdate="0" field="created_us"/>
+        <default expression="" applyOnUpdate="0" field="created_da"/>
+        <default expression="" applyOnUpdate="0" field="last_edite"/>
+        <default expression="" applyOnUpdate="0" field="last_edi_1"/>
+        <default expression="" applyOnUpdate="0" field="ShapeSTAre"/>
+        <default expression="" applyOnUpdate="0" field="ShapeSTLen"/>
+      </defaults>
+      <constraints>
+        <constraint field="OBJECTID" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="COUNTY" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="CNTYCODE" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="LAND" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="ISLAND" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="TAG" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="GlobalID" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="created_us" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="created_da" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="last_edite" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="last_edi_1" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="ShapeSTAre" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="ShapeSTLen" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" field="OBJECTID" desc=""/>
+        <constraint exp="" field="COUNTY" desc=""/>
+        <constraint exp="" field="CNTYCODE" desc=""/>
+        <constraint exp="" field="LAND" desc=""/>
+        <constraint exp="" field="ISLAND" desc=""/>
+        <constraint exp="" field="TAG" desc=""/>
+        <constraint exp="" field="GlobalID" desc=""/>
+        <constraint exp="" field="created_us" desc=""/>
+        <constraint exp="" field="created_da" desc=""/>
+        <constraint exp="" field="last_edite" desc=""/>
+        <constraint exp="" field="last_edi_1" desc=""/>
+        <constraint exp="" field="ShapeSTAre" desc=""/>
+        <constraint exp="" field="ShapeSTLen" desc=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
     <maplayer simplifyLocal="1" maxScale="0" simplifyAlgorithm="0" styleCategories="AllStyleCategories" minScale="1e+08" type="vector" labelsEnabled="0" simplifyDrawingTol="1" autoRefreshTime="0" geometry="Point" simplifyMaxScale="1" readOnly="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" simplifyDrawingHints="1" refreshOnNotifyMessage="">
       <extent>
         <xmin>-70.75580622954943522</xmin>
@@ -3729,6 +4032,287 @@ def my_form_open(dialog, layer, feature):
       <previewExpression></previewExpression>
       <mapTip></mapTip>
     </maplayer>
+    <maplayer simplifyLocal="1" maxScale="0" simplifyAlgorithm="0" styleCategories="AllStyleCategories" minScale="1e+08" type="vector" labelsEnabled="0" simplifyDrawingTol="1" autoRefreshTime="0" geometry="Polygon" simplifyMaxScale="1" readOnly="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" simplifyDrawingHints="1" refreshOnNotifyMessage="">
+      <extent>
+        <xmin>336630.28120000008493662</xmin>
+        <ymin>4759246.38319999910891056</ymin>
+        <xmax>662458.31259999983012676</xmax>
+        <ymax>5256292.5</ymax>
+      </extent>
+      <id>output_a302c90b_d356_4f7d_8763_2000f1558961</id>
+      <datasource>memory?geometry=MultiPolygon&amp;crs=EPSG:26919&amp;field=OBJECTID:int8(10,0)&amp;field=COUNTY:string(80,0)&amp;field=CNTYCODE:string(80,0)&amp;field=LAND:string(80,0)&amp;field=ISLAND:string(80,0)&amp;field=TAG:string(80,0)&amp;field=GlobalID:string(80,0)&amp;field=created_us:string(80,0)&amp;field=created_da:string(80,0)&amp;field=last_edite:string(80,0)&amp;field=last_edi_1:string(80,0)&amp;field=ShapeSTAre:double(23,15)&amp;field=ShapeSTLen:double(23,15)</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>Simplified</layername>
+      <srs>
+        <spatialrefsys>
+          <proj4>+proj=utm +zone=19 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
+          <srsid>2296</srsid>
+          <srid>26919</srid>
+          <authid>EPSG:26919</authid>
+          <description>NAD83 / UTM zone 19N</description>
+          <projectionacronym>utm</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="UTF-8">memory</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <renderer-v2 symbollevels="0" enableorderby="0" type="singleSymbol" forceraster="0">
+        <symbols>
+          <symbol alpha="1" name="0" type="fill" force_rhr="0" clip_to_extent="1">
+            <layer pass="0" locked="0" class="SimpleFill" enabled="1">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="243,166,178,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option value="" name="name" type="QString"/>
+                  <Option name="properties"/>
+                  <Option value="collection" name="type" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties/>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks type="StringList">
+          <Option value="" type="QString"/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <fieldConfiguration>
+        <field name="OBJECTID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTY">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="CNTYCODE">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="LAND">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ISLAND">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TAG">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GlobalID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="created_us">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="created_da">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="last_edite">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="last_edi_1">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ShapeSTAre">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ShapeSTLen">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias index="0" name="" field="OBJECTID"/>
+        <alias index="1" name="" field="COUNTY"/>
+        <alias index="2" name="" field="CNTYCODE"/>
+        <alias index="3" name="" field="LAND"/>
+        <alias index="4" name="" field="ISLAND"/>
+        <alias index="5" name="" field="TAG"/>
+        <alias index="6" name="" field="GlobalID"/>
+        <alias index="7" name="" field="created_us"/>
+        <alias index="8" name="" field="created_da"/>
+        <alias index="9" name="" field="last_edite"/>
+        <alias index="10" name="" field="last_edi_1"/>
+        <alias index="11" name="" field="ShapeSTAre"/>
+        <alias index="12" name="" field="ShapeSTLen"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" applyOnUpdate="0" field="OBJECTID"/>
+        <default expression="" applyOnUpdate="0" field="COUNTY"/>
+        <default expression="" applyOnUpdate="0" field="CNTYCODE"/>
+        <default expression="" applyOnUpdate="0" field="LAND"/>
+        <default expression="" applyOnUpdate="0" field="ISLAND"/>
+        <default expression="" applyOnUpdate="0" field="TAG"/>
+        <default expression="" applyOnUpdate="0" field="GlobalID"/>
+        <default expression="" applyOnUpdate="0" field="created_us"/>
+        <default expression="" applyOnUpdate="0" field="created_da"/>
+        <default expression="" applyOnUpdate="0" field="last_edite"/>
+        <default expression="" applyOnUpdate="0" field="last_edi_1"/>
+        <default expression="" applyOnUpdate="0" field="ShapeSTAre"/>
+        <default expression="" applyOnUpdate="0" field="ShapeSTLen"/>
+      </defaults>
+      <constraints>
+        <constraint field="OBJECTID" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="COUNTY" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="CNTYCODE" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="LAND" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="ISLAND" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="TAG" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="GlobalID" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="created_us" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="created_da" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="last_edite" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="last_edi_1" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="ShapeSTAre" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+        <constraint field="ShapeSTLen" exp_strength="0" unique_strength="0" constraints="0" notnull_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" field="OBJECTID" desc=""/>
+        <constraint exp="" field="COUNTY" desc=""/>
+        <constraint exp="" field="CNTYCODE" desc=""/>
+        <constraint exp="" field="LAND" desc=""/>
+        <constraint exp="" field="ISLAND" desc=""/>
+        <constraint exp="" field="TAG" desc=""/>
+        <constraint exp="" field="GlobalID" desc=""/>
+        <constraint exp="" field="created_us" desc=""/>
+        <constraint exp="" field="created_da" desc=""/>
+        <constraint exp="" field="last_edite" desc=""/>
+        <constraint exp="" field="last_edi_1" desc=""/>
+        <constraint exp="" field="ShapeSTAre" desc=""/>
+        <constraint exp="" field="ShapeSTLen" desc=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
     <maplayer simplifyLocal="1" maxScale="0" simplifyAlgorithm="0" styleCategories="AllStyleCategories" minScale="1e+08" type="vector" labelsEnabled="0" simplifyDrawingTol="1" autoRefreshTime="0" geometry="Point" simplifyMaxScale="1" readOnly="0" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" simplifyDrawingHints="1" refreshOnNotifyMessage="">
       <extent>
         <xmin>-70.75580622954943522</xmin>
@@ -4314,6 +4898,8 @@ def my_form_open(dialog, layer, feature):
     <layer id="output_7671854e_3ead_4e92_96ee_26d5dd3d6717"/>
     <layer id="county_points_well_stats_320bc860_c2fb_4938_a305_40375ff8a382"/>
     <layer id="MaineWellsByCounty_be117c70_d3e3_4c3e_a037_d1f58e10ff89"/>
+    <layer id="output_a302c90b_d356_4f7d_8763_2000f1558961"/>
+    <layer id="MaineCounties_41c43b4a_9246_4664_aae3_d1e748c61375"/>
   </layerorder>
   <properties>
     <Measurement>
