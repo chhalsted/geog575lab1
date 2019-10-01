@@ -1,33 +1,55 @@
 //Christian Halsted 2019
 //GEOG575 Lab 1
 
-// var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
-// });
-// console.log(osm)
-// osm.addTo(map);
-
-// var wellsByCounty = $.ajax("data/MaineWellsByCounty.geojson", {
-//   dataType: "json",
-//   success: function(response){
-//     //console.log(response);
-//     return response.responseJSON;
-//   }
-// })
-// console.log(wellsByCounty)
-
 var map = L.map('map').setView([45.375, -69.0], 7);
 
-L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//tried for a couple hours to move the slider onto the map but couldn't figure that out??!!
+//still want to add a base with county polygons or maybe do the Interactive Choropleth Map
+//still want to add a point layer with popup box listing all data for all getYears
+
+// function getLayer2 (map) {
+//   $.ajax("data/test.geojson", {
+//     dataType: "json",
+//     success: function(response){
+//       var wellsByCounty = L.geoJson(response).addTo(map);
+//       return wellsByCounty;
+//     }
+// });
+// }
+
+// var wellsByCounty = $.getJSON("data/test.geojson",function(data){
+//   L.geoJson(data).addTo(map);
+// });
+// console.log(wellsByCounty);
+
+//create base map layers
+var baseLayerOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
 }).addTo(map);
+var baseLayerStamen = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+  ,subdomains: 'abcd',minZoom: 0,maxZoom: 20
+})//.addTo(map);
+
+//add layer control for base map layers
+// L.control.layers({"Open Street Map":baseLayerOSM, "Stamen Terrain":baseLayerStamen}).addTo(map);
 
 //import GeoJSON data
 function getData(map){
   $.ajax("data/MaineWellsByCounty.geojson", {
     dataType: "json",
     success: function(response){
-      createPropSymbols(response, map, processData(response));
+      var layerWells = createPropSymbols(response, map, processData(response));
+      //add layer control for base map and geoJSON layers
+      L.control.layers(
+        {
+          "Open Street Map":baseLayerOSM
+          ,"Stamen Terrain":baseLayerStamen
+        },
+        {
+          "Wells":layerWells
+          //,"Test":wellsByCounty
+        }).addTo(map);
       createSequenceControls(map, response, processData(response));
     }
   });
@@ -36,18 +58,19 @@ function getData(map){
 //create proportional symbols
 function createPropSymbols(data, map, attributes){
   //create a Leaflet GeoJSON layer and add it to the map
-  L.geoJson(data, {
+  wellLayer = L.geoJson(data, {
     pointToLayer: function(feature, latlng) {
       return pointToLayer(feature, latlng, attributes);
     }
   }).addTo(map);
+  return wellLayer;
 };
 
 function pointToLayer(feature, latlng, attributes) {
   //loop through each feature in the geoJSON file
   //attribute to use for proportional symbols
   var attribute = attributes[0];
-  console.log(attribute);
+  //console.log(attribute);
   //create marker options
   var optionsMarkers = {
     fillColor: "#ff7800",
@@ -195,10 +218,10 @@ $(document).ready(getData(map));
 //   L.geoJson(data).addTo(map);
 // });
 // load GeoJSON from an external file
-$.getJSON("https://opendata.arcgis.com/datasets/142145d2158a474cbd54e743811f629d_0.geojson",function(data){
-  // add GeoJSON layer to the map once the file is loaded
-  L.geoJson(data).addTo(map);
-});
+// $.getJSON("https://opendata.arcgis.com/datasets/142145d2158a474cbd54e743811f629d_0.geojson",function(data){
+//   // add GeoJSON layer to the map once the file is loaded
+//   L.geoJson(data).addTo(map);
+// });
 
 // L.Control.Watermark = L.Control.extend({
 // 	onAdd: function(map) {
