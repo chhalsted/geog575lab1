@@ -11,16 +11,25 @@ var map = L.map('map').setView([45.375, -69.0], 7);
 //   $.ajax("data/test.geojson", {
 //     dataType: "json",
 //     success: function(response){
-//       var wellsByCounty = L.geoJson(response).addTo(map);
-//       return wellsByCounty;
+//       console.log(response)
+//       console.log(JSON.stringify(response));
 //     }
 // });
 // }
+// getLayer2();
 
-// var wellsByCounty = $.getJSON("data/test.geojson",function(data){
+var layerCounties = $.getJSON("data/MaineCounties.geojson",function(response){
+  L.geoJson(response).addTo(map);
+  // console.log(response)
+  // console.log(JSON.stringify(response));
+});
+// console.log(wellsByCounty);
+
+// // load GeoJSON from an external file
+// $.getJSON("data/MaineCountiesDissolved.geojson",function(data){
+//   // add GeoJSON layer to the map once the file is loaded
 //   L.geoJson(data).addTo(map);
 // });
-// console.log(wellsByCounty);
 
 //create base map layers
 var baseLayerOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -30,6 +39,12 @@ var baseLayerStamen = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terr
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
   ,subdomains: 'abcd',minZoom: 0,maxZoom: 20
 })//.addTo(map);
+
+var mbAttr = '<a href="http://openstreetmap.org">OpenStreetMap</a> |' +' <a href="http://mapbox.com">Mapbox</a> | Christian Halsted';
+var apitoken = 'pk.eyJ1IjoiY2hoYWxzdGVkIiwiYSI6ImNqbDJ5NTI1aDF2a2szcW41dGFvcnlsMDUifQ.VwB2q6vg1Z6ORVv4Myyrhg'
+var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={token}';
+var baseLayerMBGrayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', token: apitoken, attribution: mbAttr});
+
 
 //add layer control for base map layers
 // L.control.layers({"Open Street Map":baseLayerOSM, "Stamen Terrain":baseLayerStamen}).addTo(map);
@@ -45,10 +60,12 @@ function getData(map){
         {
           "Open Street Map":baseLayerOSM
           ,"Stamen Terrain":baseLayerStamen
+          ,"MapBox Grayscalse":baseLayerMBGrayscale
         },
         {
           "Wells":layerWells
           //,"Test":wellsByCounty
+          //,"Counties":layerCounties
         }).addTo(map);
       createSequenceControls(map, response, processData(response));
     }
@@ -209,6 +226,7 @@ function processData(data){
 };
 
 $(document).ready(getData(map));
+
 
 
 
