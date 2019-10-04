@@ -2,58 +2,59 @@
 //GEOG575 Lab 1
 
 var map = L.map('map').setView([45.375, -69.0], 7);
+map.createPane('counties');
+console.log(map.getPane('counties').style.zIndex);
+map.getPane('counties').style.zIndex = 480;
+console.log(map.getPane('counties').style.zIndex);
+map.createPane('wells');
+map.getPane('wells').style.zIndex = 460;
+
+console.log(map.getPanes())
 
 //tried for a couple hours to move the slider onto the map but couldn't figure that out??!!
 //still want to add a base with county polygons or maybe do the Interactive Choropleth Map
 //still want to add a point layer with popup box listing all data for all getYears
 
-// function getLayer2 (map) {
-//   $.ajax("data/test.geojson", {
-//     dataType: "json",
-//     success: function(response){
-//       console.log(response)
-//       console.log(JSON.stringify(response));
-//     }
-// });
-// }
-// getLayer2();
-
-var layerCounties = $.getJSON("data/MaineCounties.geojson",function(response){
-  L.geoJson(response).addTo(map);
-  // console.log(response)
-  // console.log(JSON.stringify(response));
-});
-// console.log(wellsByCounty);
-
-// // load GeoJSON from an external file
-// $.getJSON("data/MaineCountiesDissolved.geojson",function(data){
-//   // add GeoJSON layer to the map once the file is loaded
-//   L.geoJson(data).addTo(map);
-// });
-
 //create base map layers
+//Open Street Map
 var baseLayerOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
 }).addTo(map);
+//Stamen Terrain
 var baseLayerStamen = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
   ,subdomains: 'abcd',minZoom: 0,maxZoom: 20
-})//.addTo(map);
-
+})
+//MapBox gray scale
 var mbAttr = '<a href="http://openstreetmap.org">OpenStreetMap</a> |' +' <a href="http://mapbox.com">Mapbox</a> | Christian Halsted';
 var apitoken = 'pk.eyJ1IjoiY2hoYWxzdGVkIiwiYSI6ImNqbDJ5NTI1aDF2a2szcW41dGFvcnlsMDUifQ.VwB2q6vg1Z6ORVv4Myyrhg'
 var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={token}';
 var baseLayerMBGrayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', token: apitoken, attribution: mbAttr});
+//Esri imagery
+var baseLayerEsri = L.esri.basemapLayer('Imagery');
+var baseLayerEsriLabels = L.esri.basemapLayer('ImageryLabels');
 
-
-//add layer control for base map layers
-// L.control.layers({"Open Street Map":baseLayerOSM, "Stamen Terrain":baseLayerStamen}).addTo(map);
+map.createPane('wells2');
+map.getPane('wells2').style.zIndex = 480;
+var wells2 = L.esri.featureLayer({
+  url: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/MGS_Field_Localities/FeatureServer/0",
+  pointToLayer: function (geojson, latlng) {
+    return L.circleMarker(latlng, {
+      pane: 'wells2',
+      color: 'green'
+    });
+  }
+}).addTo(map);
 
 //import GeoJSON data
 function getData(map){
   $.ajax("data/MaineWellsByCounty.geojson", {
     dataType: "json",
     success: function(response){
+      var layerCounties = L.esri.featureLayer({
+          url: 'https://gis.maine.gov/arcgis/rest/services/Boundaries/Maine_Boundaries_County/MapServer/2'
+          ,pane: 'counties'
+        });
       var layerWells = createPropSymbols(response, map, processData(response));
       //add layer control for base map and geoJSON layers
       L.control.layers(
@@ -61,13 +62,25 @@ function getData(map){
           "Open Street Map":baseLayerOSM
           ,"Stamen Terrain":baseLayerStamen
           ,"MapBox Grayscalse":baseLayerMBGrayscale
+          ,"Esri Imagery":baseLayerEsri
+          // ,"Esri Imagery":baseLayerEsri
         },
         {
           "Wells":layerWells
           //,"Test":wellsByCounty
-          //,"Counties":layerCounties
+
+          // ,"Wells2":layerWells
+          ,"Esri Labels":baseLayerEsriLabels
+          ,"Counties":layerCounties
+          ,"Wells2":wells2
+        },
+        {
+          sortLayers: false,
+          collapsed: false,
+          autoZIndex: true,
         }).addTo(map);
       createSequenceControls(map, response, processData(response));
+      L.control.scale().addTo(map);
     }
   });
 };
@@ -94,7 +107,8 @@ function pointToLayer(feature, latlng, attributes) {
     color: "#000",
     weight: 1,
     opacity: 1,
-    fillOpacity: 0.8
+    fillOpacity: 0.8,
+    pane: 'counties'
   };
   //For each feature, determine its value for the selected attribute
   var attValue = Number(feature.properties[attribute]);
