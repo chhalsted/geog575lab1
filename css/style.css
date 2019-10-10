@@ -8,15 +8,19 @@
 }
 #map {
    height: 550px;
-   width: 75%;
+   width: 100%;
    display: inline-block;
 }
 #panel {
-  width: 22%;
+  /* width: 50% /*22%*/; */
   padding: 5px;
-  display: inline-block;
+  /* display: inline-block; */
   vertical-align: top;
   text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
 }
 #panelSeq{
   line-height: 42px;

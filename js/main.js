@@ -2,14 +2,6 @@
 //GEOG575 Lab 1
 
 var map = L.map('map').setView([45.375, -69.0], 7);
-map.createPane('counties');
-console.log(map.getPane('counties').style.zIndex);
-map.getPane('counties').style.zIndex = 480;
-console.log(map.getPane('counties').style.zIndex);
-map.createPane('wells');
-map.getPane('wells').style.zIndex = 460;
-
-console.log(map.getPanes())
 
 //tried for a couple hours to move the slider onto the map but couldn't figure that out??!!
 //still want to add a base with county polygons or maybe do the Interactive Choropleth Map
@@ -34,17 +26,8 @@ var baseLayerMBGrayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', token: apit
 var baseLayerEsri = L.esri.basemapLayer('Imagery');
 var baseLayerEsriLabels = L.esri.basemapLayer('ImageryLabels');
 
-map.createPane('wells2');
-map.getPane('wells2').style.zIndex = 480;
-var wells2 = L.esri.featureLayer({
-  url: "https://services1.arcgis.com/RbMX0mRVOFNTdLzd/ArcGIS/rest/services/MGS_Field_Localities/FeatureServer/0",
-  pointToLayer: function (geojson, latlng) {
-    return L.circleMarker(latlng, {
-      pane: 'wells2',
-      color: 'green'
-    });
-  }
-}).addTo(map);
+map.createPane('counties');
+map.createPane('wells');
 
 //import GeoJSON data
 function getData(map){
@@ -63,16 +46,11 @@ function getData(map){
           ,"Stamen Terrain":baseLayerStamen
           ,"MapBox Grayscalse":baseLayerMBGrayscale
           ,"Esri Imagery":baseLayerEsri
-          // ,"Esri Imagery":baseLayerEsri
         },
         {
           "Wells":layerWells
-          //,"Test":wellsByCounty
-
-          // ,"Wells2":layerWells
-          ,"Esri Labels":baseLayerEsriLabels
+          //,"Esri Labels":baseLayerEsriLabels
           ,"Counties":layerCounties
-          ,"Wells2":wells2
         },
         {
           sortLayers: false,
@@ -80,7 +58,7 @@ function getData(map){
           autoZIndex: true,
         }).addTo(map);
       createSequenceControls(map, response, processData(response));
-      L.control.scale().addTo(map);
+      L.control.scale({position: 'bottomright'}).addTo(map);
     }
   });
 };
@@ -108,7 +86,7 @@ function pointToLayer(feature, latlng, attributes) {
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8,
-    pane: 'counties'
+    pane: 'wells'
   };
   //For each feature, determine its value for the selected attribute
   var attValue = Number(feature.properties[attribute]);
@@ -149,13 +127,14 @@ function calcPropRadius(attValue) {
   return radius;
 };
 
+
 function createSequenceControls(map, response, attributes){
   //create range input element (slider)
   // $('#panel').append('<input class="range-slider" type="range">');
   $('#panelSeq').html('<input class="range-slider" type="range">');
   //set slider attributes
   $('.range-slider').attr({
-      max: getYears(response),
+      max: getYears(response)-1,
       min: 0,
       value: 0,
       step: 1
@@ -173,11 +152,11 @@ function createSequenceControls(map, response, attributes){
     if ($(this).attr('id') == 'forward'){
         index++;
         //Step 7: if past the last attribute, wrap around to first attribute
-        index = index > getYears(response) ? 0 : index;
+        index = index > getYears(response)-1 ? 0 : index;
     } else if ($(this).attr('id') == 'reverse'){
         index--;
         //Step 7: if past the first attribute, wrap around to last attribute
-        index = index < 0 ? getYears(response) : index;
+        index = index < 0 ? getYears(response)-1 : index;
     };
     //Step 8: update slider
     $('.range-slider').val(index);
