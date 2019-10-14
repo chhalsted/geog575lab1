@@ -1,26 +1,22 @@
 /* stylesheet - Christian Halsted 2019 */
 
-/* .mapid {
-  height: 550px;
-} */
-.leaflet-popup-content p {
-    margin: 0.2em 0;
-}
 #map {
    height: 550px;
    width: 100%;
    display: inline-block;
 }
 #panel {
-  /* width: 50% /*22%*/; */
-  padding: 5px;
   /* display: inline-block; */
+  /* display: block; */
+  /* width: 35%; */
   vertical-align: top;
   text-align: center;
-  display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 35%;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 5px 5px 0px 5px;
+  max-width: 250px;
 }
 #panelSeq{
   line-height: 42px;
@@ -35,37 +31,44 @@
 #reverse {
     float: left;
 }
+.range-slider {
+	line-height: 18px;
+	color: #555;
+}
+.leaflet-popup-content p {
+    margin: 0.2em 0;
+}
 
-.legend {
-	line-height: 18px;
-	color: #555;
+@media (max-width: 600px) {
+  #map {
+    height: 350px;
+  }
 }
-.legend i {
-	width: 18px;
-	height: 18px;
-	float: left;
-	margin-right: 8px;
-	opacity: 0.7;
+
+.legend, .temporal-legend {
+  padding: 1px 5px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  border-radius: 10px;
+	}
+#legendTitle {
+  text-align: center;
+  margin-bottom: 5px;
+  font-variant: small-caps;
 }
-.slider {
-	line-height: 18px;
-	color: #555;
+.symbolsContainer {
+  float: left;
+  margin-left: 50px;
 }
-.slider i {
-	width: 18px;
-	height: 18px;
-	float: left;
-	margin-right: 8px;
-	opacity: 0.7;
-}
-/*
-#mapid3 {
-  width: 80%;
+.legendCircle {
+  border-radius:50%;
+  border: 1px solid #537898;
+  background: rgba(255, 120, 0, .5);
   display: inline-block;
 }
-#panel {
-  width: 16%;
-  padding: 10px;
-  display: inline-block;
-  vertical-align: top;
-} */
+.legendValue {
+  position: absolute;
+  right: 8px;
+}

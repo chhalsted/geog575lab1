@@ -1,11 +1,9 @@
 //Christian Halsted 2019
 //GEOG575 Lab 1
 
-var map = L.map('map').setView([45.375, -69.0], 7);
-
 //tried for a couple hours to move the slider onto the map but couldn't figure that out??!!
-//still want to add a base with county polygons or maybe do the Interactive Choropleth Map
-//still want to add a point layer with popup box listing all data for all getYears
+
+var map = L.map('map').setView([45.375, -69.0], 7);
 
 //create base map layers
 //Open Street Map
@@ -29,36 +27,51 @@ var baseLayerEsriLabels = L.esri.basemapLayer('ImageryLabels');
 map.createPane('counties');
 map.createPane('wells');
 
-//import GeoJSON data
+//add the county polygons from Esri service
+var layerCounties = L.esri.featureLayer({
+  url: 'https://gis.maine.gov/arcgis/rest/services/Boundaries/Maine_Boundaries_County/MapServer/2'
+  ,pane: 'counties'
+  ,simplifyFactor: 0.5
+  ,precision: 5
+  ,style: function (feature) {
+    return {fill: true
+      ,opacity: .25
+      , color: '#d95f0e'}
+  }
+  ,onEachFeature: function (feature, layer) {
+    layer.bindTooltip(feature.properties.COUNTY + ' County', {sticky: true});
+  }
+});
+
+function addLayerControl(layerWells) {
+  //add layer control for base map and geoJSON layers
+  L.control.layers(
+    {
+      "Open Street Map":baseLayerOSM
+      ,"Stamen Terrain":baseLayerStamen
+      ,"MapBox Grayscalse":baseLayerMBGrayscale
+      ,"Esri Imagery":baseLayerEsri
+    },
+    {
+      "Wells":layerWells
+      ,"Counties":layerCounties
+    },
+    {
+      sortLayers: false,
+      collapsed: true,
+      autoZIndex: true,
+    }).addTo(map);
+}
+
+//import GeoJSON data for the well dataset
 function getData(map){
   $.ajax("data/MaineWellsByCounty.geojson", {
-    dataType: "json",
-    success: function(response){
-      var layerCounties = L.esri.featureLayer({
-          url: 'https://gis.maine.gov/arcgis/rest/services/Boundaries/Maine_Boundaries_County/MapServer/2'
-          ,pane: 'counties'
-        });
+    dataType: "json"
+    ,success: function(response){
       var layerWells = createPropSymbols(response, map, processData(response));
-      //add layer control for base map and geoJSON layers
-      L.control.layers(
-        {
-          "Open Street Map":baseLayerOSM
-          ,"Stamen Terrain":baseLayerStamen
-          ,"MapBox Grayscalse":baseLayerMBGrayscale
-          ,"Esri Imagery":baseLayerEsri
-        },
-        {
-          "Wells":layerWells
-          //,"Esri Labels":baseLayerEsriLabels
-          ,"Counties":layerCounties
-        },
-        {
-          sortLayers: false,
-          collapsed: false,
-          autoZIndex: true,
-        }).addTo(map);
+      getDataMinMax(map, processData(response)[0]);
+      addLayerControl(layerWells);
       createSequenceControls(map, response, processData(response));
-      L.control.scale({position: 'bottomright'}).addTo(map);
     }
   });
 };
@@ -78,7 +91,6 @@ function pointToLayer(feature, latlng, attributes) {
   //loop through each feature in the geoJSON file
   //attribute to use for proportional symbols
   var attribute = attributes[0];
-  //console.log(attribute);
   //create marker options
   var optionsMarkers = {
     fillColor: "#ff7800",
@@ -127,7 +139,6 @@ function calcPropRadius(attValue) {
   return radius;
 };
 
-
 function createSequenceControls(map, response, attributes){
   //create range input element (slider)
   // $('#panel').append('<input class="range-slider" type="range">');
@@ -141,13 +152,14 @@ function createSequenceControls(map, response, attributes){
   });
   $('#panelSeq').append('<button class="skip" id="reverse">Reverse</button>');
   $('#panelSeq').append('<button class="skip" id="forward">Skip</button>');
+  var yearStart = 2010;
+  $('#panelSeq').append('<div id="labelYear">' + 'Year: ' + yearStart + '</div>');
   $('#reverse').html('<img src="img/reverse.png">');
   $('#forward').html('<img src="img/forward.png">');
   //Step 5: click listener for buttons
   $('.skip').click(function(){
     //get the old index value
     var index = $('.range-slider').val();
-
     //Step 6: increment or decrement depending on button clicked
     if ($(this).attr('id') == 'forward'){
         index++;
@@ -160,15 +172,16 @@ function createSequenceControls(map, response, attributes){
     };
     //Step 8: update slider
     $('.range-slider').val(index);
-    // console.log(index);
+    $('#labelYear').html('Year: ' + (yearStart + index));
     updatePropSymbols(map, attributes[index]);
+    getDataMinMax(map, attributes[index]);
   });
 
   //Step 5: input listener for slider
   $('.range-slider').on('input', function(){
-      var index = $(this).val();
-      // console.log(index);
-      updatePropSymbols(map, attributes[index]);
+    var index = $(this).val();
+    updatePropSymbols(map, attributes[index]);
+    getDataMinMax(map, attributes[index]);
   });
 };
 
@@ -178,7 +191,6 @@ function updatePropSymbols(map, attribute){
     if (layer.feature && layer.feature.properties[attribute]){
       //access feature properties
       var props = layer.feature.properties;
-      // console.log(props);
       //update each feature's radius based on new attribute values
       var radius = calcPropRadius(props[attribute]);
       layer.setRadius(radius);
@@ -218,6 +230,63 @@ function processData(data){
   return attributes;
 };
 
+//add scale bar to map
+L.control.scale({position: 'bottomleft'}).addTo(map);
+
+//get the minimum and maximum values of current year's data
+function getDataMinMax(map, attribute){
+  var min = Infinity;
+  var max = -Infinity;
+  map.eachLayer(function(layer){
+    if (layer.feature && layer.feature.properties[attribute]){
+      var props = layer.feature.properties;
+      if (parseInt(props[attribute]) < min) {min = props[attribute]}
+      if (parseInt(props[attribute]) > max) {max = props[attribute]}
+    };
+  });
+  createLegend(min, max)
+};
+
+function createLegend(min, max) {
+  if (min < 10) {min = 10}
+	function roundNumber(inNumber) {
+		return (Math.round(inNumber/10) * 10);
+	}
+  $( ".legend" ).remove();  //remove current legend
+  var legend = L.control( { position: 'bottomright' } );
+  legend.onAdd = function(map) {
+    var legendContainer = L.DomUtil.create("div", "legend");
+  	var symbolsContainer = L.DomUtil.create("div", "symbolsContainer");
+  	var classes = [roundNumber(min), roundNumber((max-min)/2), roundNumber(max)];
+  	var legendCircle;
+  	var lastRadius = 0;
+  	var currentRadius;
+  	var margin;
+
+  	L.DomEvent.addListener(legendContainer, 'mousedown', function(e) {
+  		L.DomEvent.stopPropagation(e);
+  	});
+
+  	$(legendContainer).append("<h3 id='legendTitle'>Wells Drilled<br>Year</h3>");
+
+  	for (var i = 0; i <= classes.length-1; i++) {
+  		legendCircle = L.DomUtil.create("div", "legendCircle");
+  		currentRadius = calcPropRadius(classes[i]);
+  		margin = -currentRadius - lastRadius - 2;
+  		$(legendCircle).attr("style", "width: " + currentRadius*2 +
+  			"px; height: " + currentRadius*2 +
+  			"px; margin-left: " + margin + "px");
+  		$(legendCircle).append("<span class='legendValue'>"+classes[i]+"</span>");
+  		$(symbolsContainer).append(legendCircle);
+  		lastRadius = currentRadius;
+  	}
+  	$(legendContainer).append(symbolsContainer);
+  	return legendContainer;
+	};
+  legend.addTo(map);
+}
+
+
 $(document).ready(getData(map));
 
 
@@ -233,24 +302,3 @@ $(document).ready(getData(map));
 //   // add GeoJSON layer to the map once the file is loaded
 //   L.geoJson(data).addTo(map);
 // });
-
-// L.Control.Watermark = L.Control.extend({
-// 	onAdd: function(map) {
-// 		var img = L.DomUtil.create('img');
-//
-// 		img.src = 'https://leafletjs.com/docs/images/logo.png';
-// 		img.style.width = '200px';
-//
-// 		return img;
-// 	},
-//
-// 	onRemove: function(map) {
-// 		// Nothing to do here
-// 	}
-// });
-//
-// L.control.watermark = function(opts) {
-// 	return new L.Control.Watermark(opts);
-// }
-//
-// L.control.watermark({ position: 'bottomleft' }).addTo(map);
